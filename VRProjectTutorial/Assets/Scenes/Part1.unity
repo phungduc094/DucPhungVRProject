@@ -168,8 +168,8 @@ GameObject:
   - component: {fileID: 563650749}
   - component: {fileID: 563650748}
   - component: {fileID: 563650747}
-  - component: {fileID: 563650746}
   - component: {fileID: 563650745}
+  - component: {fileID: 563650746}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -206,7 +206,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &563650746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,8 +557,8 @@ GameObject:
   - component: {fileID: 1134187501}
   - component: {fileID: 1134187500}
   - component: {fileID: 1134187499}
-  - component: {fileID: 1134187498}
   - component: {fileID: 1134187497}
+  - component: {fileID: 1134187498}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -595,7 +595,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1134187498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,8 +887,8 @@ GameObject:
   - component: {fileID: 1941943968}
   - component: {fileID: 1941943967}
   - component: {fileID: 1941943966}
-  - component: {fileID: 1941943965}
   - component: {fileID: 1941943964}
+  - component: {fileID: 1941943965}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -925,7 +925,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1941943965
 MonoBehaviour:
   m_ObjectHideFlags: 0
