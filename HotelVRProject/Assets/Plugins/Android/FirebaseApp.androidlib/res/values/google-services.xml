@@ -5,6 +5,6 @@
   <string name="project_id" translatable="false">ducphunghotelvr</string>
   <string name="google_api_key" translatable="false">AIzaSyBldfVY607QhMUcAK5YibizDsJzk17XAWw</string>
   <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBldfVY607QhMUcAK5YibizDsJzk17XAWw</string>
-  <string name="google_app_id" translatable="false">1:251434562761:android:00a0e3fedaf3b01e164918</string>
+  <string name="google_app_id" translatable="false">1:251434562761:android:90d1da1b2ffeb7ed164918</string>
   <string name="default_web_client_id" translatable="false">251434562761-cber9b4avi6r29br2ilmamj971vfdr7b.apps.googleusercontent.com</string>
 </resources>
