@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "251434562761",
+    "project_id": "ducphunghotelvr",
+    "storage_bucket": "ducphunghotelvr.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251434562761:android:00a0e3fedaf3b01e164918",
+        "android_client_info": {
+          "package_name": "com.ducphung.HotelVRProject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251434562761-cber9b4avi6r29br2ilmamj971vfdr7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBldfVY607QhMUcAK5YibizDsJzk17XAWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251434562761-cber9b4avi6r29br2ilmamj971vfdr7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
