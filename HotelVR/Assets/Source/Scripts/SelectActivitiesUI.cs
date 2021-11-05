@@ -62,12 +62,10 @@ public class SelectActivitiesUI : Panel
 
     public void PracticeBtn()
     {
-        /*if (!canTouch) return;
+        LessonManager.instance.StartLesson();
+        LessonManager.instance.LoadLesson();
 
-        canTouch = false;*/
-        LessonManager.instance.Practice();
         Deactive();
-        //SceneLoader.instance.LoadScene();
     }
 
     #endregion

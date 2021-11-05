@@ -4,64 +4,80 @@ using UnityEngine;
 
 public class PracticeController : MonoBehaviour
 {
-    #region Singleton
-
-    public static PracticeController instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
-    #endregion
-
-    [SerializeField] private UnityEngine.Events.UnityEvent[] steps;
+    [SerializeField] private Instructor instructor;
+    [SerializeField] private Step[] steps;
     [SerializeField] private ItemGroup[] itemGroups;
 
-    private void Start()
+    int index;
+    public void StartPractice()
     {
-        ResetGrabbale();
-
-        NextStep();
+        index = 0;
+        instructor.ReadLessonTitle();
     }
 
-    int index = 0;
+    public bool isCheck { get; set; }
+    public void NextStep()
+    {
+        if (index == steps.Length)
+        {
+            Debug.Log("Finished Practice.");
+            LessonController.instance.NextLesson();
+            return;
+        }
+
+        ClearGrabbale();
+
+        SetConditions(steps[index].conditionAmount);
+        if (steps[index].prepareTask != null) steps[index].prepareTask?.Invoke();
+
+        isCheck = false;
+        instructor.ReadGuide(index);
+        StartCoroutine(WaitingFinishedGuide());
+    }
+
+    private IEnumerator WaitingFinishedGuide()
+    {
+        while (!isCheck)
+        {
+            yield return null;
+        }
+
+        foreach (Item it in itemGroups[index].items) it.SetGrabbale(true);
+    }
+
+
     private void Update()
     {
+        if (!isCheck) return;
+
         if (index < steps.Length)
         {
-            steps[index]?.Invoke();
+            steps[index].task?.Invoke();
         }
     }
 
     private void LateUpdate()
     {
+        if (!isCheck) return;
+
         if (CheckAllDone())
         {
             index++;
             NextStep();
         }
-    }
-    
-    private void ResetGrabbale()
-    {
-        for (int i = 0; i < itemGroups.Length; i++)
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            foreach (Item it in itemGroups[i].items) it.SetGrabbale(false);
+            index++;
+            NextStep();
         }
-    }
-    private void NextStep()
-    {
-        ResetGrabbale();
-        foreach(Item it in itemGroups[index].items) it.SetGrabbale(true);
-        LessonManager.instance.NextStep();
     }
 
     public bool[] checkConditions { get; set; }
-    public void SetStep(int amountStep)
+    private void SetConditions(int conditionAmount)
     {
-        checkConditions = new bool[amountStep];
-        for (int i = 0; i < amountStep; i++) checkConditions[i] = false;
+        checkConditions = new bool[conditionAmount];
+        for (int i = 0; i < conditionAmount; i++) checkConditions[i] = false;
     }
 
     private bool CheckAllDone()
@@ -72,10 +88,26 @@ public class PracticeController : MonoBehaviour
         }
         return true;
     }
+
+    private void ClearGrabbale()
+    {
+        for (int i = 0; i < itemGroups.Length; i++)
+        {
+            foreach (Item it in itemGroups[i].items) it.SetGrabbale(false);
+        }
+    }
 }
 
 [System.Serializable]
 public class ItemGroup
 {
     public Item[] items;
+}
+
+[System.Serializable]
+public class Step
+{
+    public int conditionAmount;
+    public UnityEngine.Events.UnityEvent prepareTask;
+    public UnityEngine.Events.UnityEvent task;
 }

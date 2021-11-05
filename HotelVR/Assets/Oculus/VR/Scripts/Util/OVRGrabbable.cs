@@ -33,6 +33,8 @@ public class OVRGrabbable : MonoBehaviour
     protected Collider m_grabbedCollider = null;
     protected OVRGrabber m_grabbedBy = null;
 
+    public bool constraintY;
+
 	/// <summary>
 	/// If true, the object can currently be grabbed.
 	/// </summary>
@@ -94,7 +96,9 @@ public class OVRGrabbable : MonoBehaviour
 	/// </summary>
     public Rigidbody grabbedRigidbody
     {
-        get { return m_grabbedCollider.attachedRigidbody; }
+        get {
+            if (m_grabbedCollider == null) Debug.Log(this.name);
+            return m_grabbedCollider.attachedRigidbody; }
     }
 
 	/// <summary>
@@ -105,16 +109,21 @@ public class OVRGrabbable : MonoBehaviour
         get { return m_grabPoints; }
     }
 
-	/// <summary>
-	/// Notifies the object that it has been grabbed.
-	/// </summary>
+    /// <summary>
+    /// Notifies the object that it has been grabbed.
+    /// </summary>
+    /// 
+
+    public UnityEngine.Events.UnityEvent beginCallBack;
+    public UnityEngine.Events.UnityEvent endCallBack;
 	virtual public void GrabBegin(OVRGrabber hand, Collider grabPoint)
     {
         m_grabbedBy = hand;
         m_grabbedCollider = grabPoint;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
-    }
 
+        beginCallBack?.Invoke();
+    }
 	/// <summary>
 	/// Notifies the object that it has been released.
 	/// </summary>
@@ -126,6 +135,8 @@ public class OVRGrabbable : MonoBehaviour
         rb.angularVelocity = angularVelocity;
         m_grabbedBy = null;
         m_grabbedCollider = null;
+
+        endCallBack?.Invoke();
     }
 
     void Awake()

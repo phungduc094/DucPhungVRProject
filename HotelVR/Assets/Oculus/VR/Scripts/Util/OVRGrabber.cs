@@ -328,6 +328,13 @@ public class OVRGrabber : MonoBehaviour
         Vector3 grabbablePosition = pos + rot * m_grabbedObjectPosOff;
         Quaternion grabbableRotation = rot * m_grabbedObjectRotOff;
 
+        if (m_grabbedObj.constraintY)
+        {
+            grabbablePosition.y = m_grabbedObj.transform.position.y;
+            grabbableRotation.z = m_grabbedObj.transform.rotation.z;
+            grabbableRotation.x = m_grabbedObj.transform.rotation.x;
+        }
+
         if (forceTeleport)
         {
             grabbedRigidbody.transform.position = grabbablePosition;

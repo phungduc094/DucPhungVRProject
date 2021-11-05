@@ -23,27 +23,45 @@ public class LessonManager : MonoBehaviour
 
     #endregion
 
-    [SerializeField] private Instructor instructor;
+    public int totalLesson = 1;
+    public int lesson = 1;
+    private LessonController lessonController;
 
-    public void SetUp()
+    public void StartLesson()
     {
-        instructor.SetUp();
+        lesson = 1;
     }
 
-    public void Practice()
+    public void LoadLesson()
     {
-        //OVRCamPos.instance.SetCamPosition(1);
-        SetUp();
-        instructor.PlayLessionTutorial();
+        if (lessonController != null) Destroy(lessonController.gameObject);
+
+        GameObject newLesson = Instantiate(Resources.Load(("AlacartPractice"), typeof(GameObject)), transform) as GameObject;
+        lessonController = newLesson.GetComponent<LessonController>();
+
+        Debug.Log("Load Lesson: " + newLesson.name);
+        lessonController.Init();
+        lessonController.SetUp();
+        lessonController.StartLesson();
     }
 
-    public void Test()
+    public void NextLesson()
     {
-
+        if (lesson == totalLesson) Debug.Log("Finished Lesson");
+        else
+        {
+            lesson++;
+            LoadLesson();
+        }
+        lesson++;
     }
 
-    public void NextStep()
+    private void Update()
     {
-        instructor.NextStep();
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            StartLesson();
+            LoadLesson();
+        }
     }
 }

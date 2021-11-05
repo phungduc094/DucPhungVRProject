@@ -13,11 +13,11 @@ TagManager:
   - UI
   - Ground
   - Grabble
-  - Parent
-  - Child
-  - Player
-  - Khay
-  - Table
+  - Interactable
+  - CorrectLayer
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -7,95 +7,41 @@ public class Instructor : MonoBehaviour
 {
     [Header("Data")]
     [SerializeField] private Teacher teacher;
-    [SerializeField] private LessonTutorial[] lessonTutorials;
+    [SerializeField] private LessonTutorial lessonTutorial;
 
     [Header("Preferences")]
     [SerializeField] private TextMeshProUGUI textGuide;
 
-    string[] instructionsCurrent;
-    AudioClip[] clipsCurrent;
-    int index = 0;
-
-    [SerializeField] private LocomotionTeleport locomotion;
-    [SerializeField] private Transform target;
-    public void PlayLessionTutorial()
+    public void ReadLessonTitle()
     {
-        /*LoginUI.instance.Deactive();*/
-
-        /*locomotion.DoTeleportCustom(target);*/
-        index = 0;
-        PlayLession(0);
+        AudioClip clip = lessonTutorial.titleClip;
+        SoundManager.instance.PlaySFX(clip, 1f);
+        StartCoroutine(DoReadingTitle(clip));
     }
 
-    private void PlayLession(int index)
+    private IEnumerator DoReadingTitle(AudioClip clip)
     {
-        instructionsCurrent = lessonTutorials[index].instructions;
-        clipsCurrent = lessonTutorials[index].clips;
+        yield return new WaitForSeconds(clip.length);
 
-        StartCoroutine(DoPlayLesson());
+        yield return new WaitForSeconds(0.5f);
+        LessonController.instance.practiceCurrent.NextStep();
     }
 
-    bool nextStep;
-    private IEnumerator DoPlayLesson()
+    public void ReadGuide(int index)
     {
-        SoundManager.instance.PlaySFX(clipsCurrent[0], 1f);
-        textGuide.text = instructionsCurrent[0];
+        textGuide.text = lessonTutorial.instructions[index];
+        AudioClip clip = lessonTutorial.clips[index];
+        SoundManager.instance.PlaySFX(clip, 1f);
         teacher.PlayBowAnim();
-        yield return new WaitForSeconds(clipsCurrent[0].length);
 
-        int i = 1;
-        nextStep = false;
-
-        while(i < instructionsCurrent.Length)
-        {
-            SoundManager.instance.PlaySFX(clipsCurrent[i], 1f);
-            textGuide.text = instructionsCurrent[i];
-            teacher.PlayBowAnim();
-
-            while(!nextStep)
-            {
-                yield return null;
-            }
-
-            nextStep = false;
-            i++;
-        }
-
-        Debug.Log("Finished Lesson " + (index + 1).ToString());
-        index++;
-        if (index < lessonTutorials.Length)
-        {
-            PlayLession(index);
-        }
+        StartCoroutine(DoReading(clip));
     }
 
-    public void NextStep()
+    private IEnumerator DoReading(AudioClip clip)
     {
-        nextStep = true;
-    }
+        yield return new WaitForSeconds(clip.length);
 
-    [SerializeField]
-    Transform ovrCam;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            SetUp();
-            PlayLessionTutorial();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            nextStep = true;
-        }
-
-        if (ovrCam != null)
-            textGuide.transform.LookAt(ovrCam.position);
-    }
-
-    public void SetUp()
-    {
-        teacher.gameObject.SetActive(true);
+        LessonController.instance.practiceCurrent.isCheck = true;
     }
 }
 
@@ -103,5 +49,6 @@ public class Instructor : MonoBehaviour
 public class LessonTutorial
 {
     public string[] instructions;
+    public AudioClip titleClip;
     public AudioClip[] clips;
 }
