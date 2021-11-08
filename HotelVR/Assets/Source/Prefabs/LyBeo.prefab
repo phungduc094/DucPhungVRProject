@@ -203,6 +203,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  target: {fileID: 7675861084053568208}
 --- !u!1 &5699598955457944656
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,7 +288,7 @@ SphereCollider:
   m_GameObject: {fileID: 8918785051816921607}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}

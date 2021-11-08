@@ -364,9 +364,9 @@ SphereCollider:
   m_GameObject: {fileID: 2429416674102171043}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.01
+  m_Radius: 0.005
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3375729888695019266
 GameObject:
@@ -833,8 +833,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.03, y: 0.071198516, z: 0.03}
-  m_Center: {x: 0, y: 0.03830248, z: 0}
+  m_Size: {x: 0.03, y: 0.13454267, z: 0.03}
+  m_Center: {x: 0, y: 0.06997457, z: 0}
 --- !u!54 &5948001956731379334
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -910,6 +910,7 @@ MonoBehaviour:
   positionLayer:
     serializedVersion: 2
     m_Bits: 512
+  isRelease: 0
 --- !u!114 &-6908323563071626350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,7 +1224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.0002
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalScale.y
@@ -1267,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

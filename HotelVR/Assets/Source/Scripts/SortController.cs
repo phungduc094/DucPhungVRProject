@@ -21,15 +21,13 @@ public class SortController : MonoBehaviour, IDestination
         }
     }
 
-    public void SelectPosition(Item item)
+    public void SelectPosition(ObjectType type)
     {
-        if (allObject.ContainsKey(item.GetObjectType()) == false) return;
+        if (!allObject.ContainsKey(type)) return;
 
-        if (allObject[item.GetObjectType()].Contains(item.transform)) return;
-
-        Debug.Log("Select");
         // check type object sort
-        ObjectSort objectSort = GetObjectSort(item.GetObjectType());
+        ObjectSort objectSort = GetObjectSort(type);
+        if (objectSort == null) return;
 
         // spawn new position
         if (objectSort.dependence == ObjectDependence.Dependence)
@@ -50,10 +48,9 @@ public class SortController : MonoBehaviour, IDestination
 
     public void LeavePosition(Item item)
     {
-        if (allObject.ContainsKey(item.GetObjectType()) == false) return;
+        if (!allObject.ContainsKey(item.GetObjectType())) return;
+        Debug.Log("Call Leave");
 
-        Debug.Log("Leave");
-        Debug.Log(item.name);
         ObjectSort obj = GetObjectSort(item.GetObjectType());
         obj.transform.gameObject.SetActive(false);
 
@@ -68,7 +65,7 @@ public class SortController : MonoBehaviour, IDestination
 
     public void CorrectPosition(Item item)
     {
-        if (allObject.ContainsKey(item.GetObjectType()) == false) return;
+        if (!allObject.ContainsKey(item.GetObjectType())) return;
 
         allObject[item.GetObjectType()].Add(item.transform);
 
@@ -78,8 +75,6 @@ public class SortController : MonoBehaviour, IDestination
 
         objectSort.transform.gameObject.SetActive(false);
         objectSort.transform.position = objectSort.transform.position + objectSort.heightWorld * transform.up;
-
-        Debug.Log("call");
     }
 
     private ObjectSort GetObjectSort(ObjectType type)

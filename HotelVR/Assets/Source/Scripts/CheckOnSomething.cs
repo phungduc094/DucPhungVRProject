@@ -25,9 +25,6 @@ public class CheckOnSomething : MonoBehaviour, IDestination
     [Header("Check be Dropped")]
     [SerializeField] private LayerMask groundLayer;
 
-    [Header("Destination")]
-    [SerializeField] private GameObject target;
-
     public bool isOnObj { get; set; }
 
     float radius;
@@ -43,7 +40,7 @@ public class CheckOnSomething : MonoBehaviour, IDestination
         if (Physics.OverlapSphere(checkPoint.position, radius, groundLayer).Length > 0)
         {
             LessonController.instance.LessonFail();
-            //this.enabled = false;
+            this.enabled = false;
             return;
         }
         
@@ -81,7 +78,9 @@ public class CheckOnSomething : MonoBehaviour, IDestination
         {
             LessonController.instance.practiceCurrent.checkConditions[index] = true;
             if (isShow)
+            {
                 HideDestination();
+            }
         }
         else
             LessonController.instance.practiceCurrent.checkConditions[index] = false;
@@ -141,6 +140,7 @@ public class CheckOnSomething : MonoBehaviour, IDestination
     }
 
     bool isShow;
+    [SerializeField] private GameObject target;
     public void ShowDestination()
     {
         isShow = true;

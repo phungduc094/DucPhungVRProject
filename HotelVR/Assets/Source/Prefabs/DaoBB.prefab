@@ -40,7 +40,7 @@ SphereCollider:
   m_GameObject: {fileID: 883641524682286840}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
@@ -286,6 +286,7 @@ MonoBehaviour:
   positionLayer:
     serializedVersion: 2
     m_Bits: 512
+  isRelease: 0
 --- !u!114 &5967114781610729150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +311,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  target: {fileID: 0}
+  target: {fileID: 5399037695817074026}
 --- !u!1 &5377729694058939565
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,10 +386,6 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.0005
-      objectReference: {fileID: 0}
-    - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -398,7 +395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.12
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 594498308062750690, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_LocalRotation.w
@@ -446,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2507769484737843442, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4174269878583196364, guid: 2b4b13643bb5b8945ab4683ca2cdbb05, type: 3}
       propertyPath: m_Layer

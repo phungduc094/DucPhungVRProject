@@ -10,10 +10,7 @@ public class LessonController : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        instance = this;
     }
 
     #endregion

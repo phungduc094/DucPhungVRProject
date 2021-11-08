@@ -4,6 +4,7 @@ using UnityEngine;
 using Firebase.Auth;
 using Firebase;
 using TMPro;
+using Firebase.Database;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class FirebaseManager : MonoBehaviour
     public DependencyStatus dependencyStatus;
     public FirebaseAuth auth;
     public FirebaseUser User;
+
+    public DatabaseReference dbRef;
 
     private void Awake()
     {
@@ -32,6 +35,8 @@ public class FirebaseManager : MonoBehaviour
     {
         UIManager.instance.ShowLoadingScreen();
         StartCoroutine(CheckAndFixDependencies());
+
+        dbRef = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
     private IEnumerator CheckAndFixDependencies()
@@ -69,6 +74,7 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    #region Login function
     private void AuthStateChanged(object sender, System.EventArgs eventArgs)
     {
         if (auth.CurrentUser != User)
@@ -169,6 +175,9 @@ public class FirebaseManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Register function
     //Function for the register button
     public void RegisterButton(string emailRegister, string passwordRegister, string passwordVerifyRegister, string usernameRegister)
     {
@@ -266,4 +275,53 @@ public class FirebaseManager : MonoBehaviour
     {
         auth
     }*/
+
+    #endregion
+
+    #region WriteData
+
+    public void WriteNewResultTesting(float mark)
+    {
+        string username = User.DisplayName;
+        TestClass tmp = new TestClass(username, mark);
+
+        string json = JsonUtility.ToJson(tmp);
+
+        // create a new node with new username and new mark
+        //dbRef.Child("Mark").Child(User.UserId).SetRawJsonValueAsync(json);
+
+        // update new value for username reference
+        dbRef.Child("Mark").Child(User.UserId).Child("username").SetValueAsync("newName");
+    }
+
+    [SerializeField] private float mark;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log(User.DisplayName);
+            WriteNewResultTesting(mark);
+        }
+
+        /*if (Input.GetKeyDown(KeyCode.L))
+        {
+            PrefInfo.SetAutoLogin(1);
+            Login("test@gmail.com", "123456");
+        }*/
+    }
+
+    #endregion
+}
+
+[System.Serializable]
+public class TestClass
+{
+    public string username;
+    public float mark;
+
+    public TestClass(string username, float mark)
+    {
+        this.username = username;
+        this.mark = mark;
+    }
 }

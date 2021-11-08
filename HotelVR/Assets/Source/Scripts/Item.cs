@@ -57,12 +57,12 @@ public class Item : MonoBehaviour, IObject, IDestination
     SortController sortController = null;
     private void OnTriggerEnter(Collider other)
     {
-        if (0 != (positionLayer.value & 1<<other.gameObject.layer) && !isTrigger)
+        if (0 != (positionLayer.value & 1<<other.gameObject.layer) && !isTrigger && grabbable.isGrabbed)
         {
             isTrigger = true;
 
             sortController = other.GetComponent<SortController>();
-            sortController.SelectPosition(this);
+            sortController.SelectPosition(objType);
         }
     }
 
@@ -87,7 +87,6 @@ public class Item : MonoBehaviour, IObject, IDestination
         if (isTrigger)
             sortController.CorrectPosition(this);
 
-        if (target.activeInHierarchy) target.SetActive(false);
         CallBackWhenRelease();
     }
 
@@ -120,6 +119,17 @@ public class Item : MonoBehaviour, IObject, IDestination
         yield return new WaitForSeconds(timeDelay);
         checkOnSomething.CheckIsChild();
     }
+
+    [SerializeField] private bool isRelease;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P) && isRelease)
+        {
+            isRelease = false;
+            Release();
+        }
+    }
+
     bool isShow = false;
     public void ShowDestination()
     {

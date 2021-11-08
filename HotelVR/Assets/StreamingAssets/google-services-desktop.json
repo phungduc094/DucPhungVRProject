@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "251434562761",
+    "firebase_url": "https://ducphunghotelvr-default-rtdb.firebaseio.com",
     "project_id": "ducphunghotelvr",
     "storage_bucket": "ducphunghotelvr.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:251434562761:android:90d1da1b2ffeb7ed164918",
+        "mobilesdk_app_id": "1:251434562761:android:f0f2c6af08b931f5164918",
         "android_client_info": {
           "package_name": "com.ducphung.HotelVRProject"
         }
